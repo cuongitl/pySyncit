@@ -1,0 +1,6 @@
+/tmp/
+/config.yml
+/.idea
+/__pycache__
+*.log
+

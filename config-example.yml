@@ -1,0 +1,16 @@
+mode: 'update'  # or: mirror
+s1:
+  - src_dir: "D:/Coders-X/pyProjects/pyAny/tmp/s1.xlsx"
+  - dest_dir: "D:/Coders-X/pyProjects/pyAny/tmp2/"
+  - exclude:
+      - ".ffs_db"
+s2:
+  - src_dir: "D:/Coders-X/pyProjects/pyAny/tmp/abc/"
+  - dest_dir: "D:/Coders-X/pyProjects/pyAny/tmp2/abc/"
+  - exclude:
+      - ".ffs_db"
+s3:
+  - src_dir: "D:/Coders-X/pyProjects/pyAny/tmp/xyz/*.txt"
+  - dest_dir: "D:/Coders-X/pyProjects/pyAny/tmp2/xyz/"
+  - exclude:
+      - ".ffs_db"
