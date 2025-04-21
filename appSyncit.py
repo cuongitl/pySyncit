@@ -8,30 +8,32 @@ Synchronizing files between directories is a common task for managing backups, e
 While many tools are available for this purpose, creating a Python script for directory synchronization provides greater flexibility and control.
 # Updated: 2025-03-28
 """
-import logging
-
-from run import *
+from pySyncit.core import *
 
 if __name__ == '__main__':
+    verbose = False
     mode_update = False
     # Load the configuration from the YAML file
     config = load_config(file_config)
     # print(config)
     # Log the start of the program
     logging.info(f"Program started...running_mode: {config['mode']}")
+    if config['verbose']:
+        verbose = True
     if config['mode'] == 'update':
         mode_update = True
     # print(f"mode_update: {mode_update}")
     for section in config:
-        if section in ['mode']:
+        if section in ['mode', 'verbose']:
             continue
-        print("*" * 25)
         path_info = config[section]
-        print(f"section: {section} - path_info: {path_info}")
+        if verbose:
+            print("*" * 25)
+            print(f"section: {section} - path_info: {path_info}")
         src_dir = path_info[0]['src_dir']
         dest_dir = path_info[1]['dest_dir']
         exclude = None
-        if len(path_info)> 2 and 'exclude' in path_info[2]:
+        if len(path_info) > 2 and 'exclude' in path_info[2]:
             exclude = path_info[2]['exclude']
             # print(f"exclude: {path_info[2]['exclude']}")
         # print(f"src_dir: {src_dir}, \ndest_dir: {dest_dir}")
@@ -44,5 +46,6 @@ if __name__ == '__main__':
             continue
         # Handle the copying logic based on the src_dir pattern
         copy_file_or_dir(src_dir, dest_dir, _update=mode_update, _exclude=exclude)
-    print("*" * 25)
-    print("Done.")
+    if verbose:
+        print("*" * 25)
+        print("Done.")
